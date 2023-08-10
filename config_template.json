@@ -1,34 +1,82 @@
 {
   "inbounds": [
     {
-      "port": 56565,
-      "protocol": "vmess",
+      "listen": "0.0.0.0",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "chika",
+            "flow": "xtls-rprx-vision"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "dest": "www.lovelive-anime.jp:443",
+          "serverNames": ["www.lovelive-anime.jp"],
+          "privateKey": "2KZ4uouMKgI8nR-LDJNP1_MHisCJOmKGj9jUjZLncVU",
+          "shortIds": ["6ba85179e30d4fc2"]
+        }
+      },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
-      },
-      "allocate": {
-        "strategy": "always",
-        "refresh": 5,
-        "concurrency": 3
-      },
+        "destOverride": ["http", "tls", "quic"]
+      }
+    },
+    {
+      "listen": "0.0.0.0",
+      "port": 80,
+      "protocol": "vless",
       "settings": {
         "clients": [
           {
             "id": "id",
-            "alterId": 0
+            "flow": "none"
           }
         ]
       },
       "streamSettings": {
-        "network": "tcp"
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": false,
+          "path": "/vless",
+          "headers": {
+            "Host": "xray.com"
+          }
+        }
       },
-      "tag": "vmess-inbound",
-      "default": {
-        "level": 0,
-        "alterId": 0
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls", "quic"]
+      }
+    },
+    {
+      "listen": "0.0.0.0",
+      "port": 65555,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "id",
+            "level": 0,
+            "email": "love@xray.com"
+          }
+        ]
       },
-      "disableInsecureEncryption": true
+      "streamSettings": {
+        "network": "tcp",
+        "security": "none"
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls", "quic"]
+      }
     }
   ],
   "outbounds": [
