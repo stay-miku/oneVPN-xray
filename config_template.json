@@ -35,10 +35,10 @@
       "settings": {
         "clients": [
           {
-            "id": "id",
-            "flow": "none"
+            "id": "id"
           }
-        ]
+        ],
+        "decryption": "none"
       },
       "streamSettings": {
         "network": "ws",
