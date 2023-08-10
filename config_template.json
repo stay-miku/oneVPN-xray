@@ -1,0 +1,67 @@
+{
+  "inbounds": [
+    {
+      "port": 56565,
+      "protocol": "vmess",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      },
+      "allocate": {
+        "strategy": "always",
+        "refresh": 5,
+        "concurrency": 3
+      },
+      "settings": {
+        "clients": [
+          {
+            "id": "id",
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp"
+      },
+      "tag": "vmess-inbound",
+      "default": {
+        "level": 0,
+        "alterId": 0
+      },
+      "disableInsecureEncryption": true
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "sendThrough": "$ip_address",
+      "settings": {}
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {},
+      "tag": "blocked"
+    }
+  ],
+  "policy": {
+    "levels": {
+      "0": {
+        "handshake": 10,
+        "connIdle": 100,
+        "uplinkOnly": 2,
+        "downlinkOnly": 3,
+        "statsUserUplink": true,
+        "statsUserDownlink": true,
+        "bufferSize": 10240
+      }
+    },
+    "system": {
+      "statsInboundDownlink": true,
+      "statsInboundUplink": true
+    }
+  },
+  "routing": {
+    "rules": []
+  },
+  "stats": {}
+}
